@@ -12,7 +12,7 @@
 #include "utility.h"
 #include "nodelist.h"
 #include "graph.h"
-//#include "fonctions-algo.h"
+#include "fonctions-algo.h"
 
 
 /******************/
@@ -126,20 +126,28 @@ int main(int argc, char **argv){
 /////////////////   LOADING GRAPH   ///////////////////////
 ///////////////////////////////////////////////////////////
 
-
-
-
-
+	graph* graph = graph_from_file(fin);
+	int nb_sommet = graph->n;
+	int nb_arete = graph->m;
+	fprintf(stderr, "Nombre de sommets : %d\nNombre d'arêtes : %d\n", nb_sommet, nb_arete);
+	free_graph(graph);
 
 ///////////////////////////////////////////////////////////
 //////////////////   DATA STRUCTURE   /////////////////////
 ///////////////////////////////////////////////////////////
 
-  
-  
-  
-  
-  
+	int* identifiant_groupe = (int*)malloc(nb_sommet * sizeof(int)); //On donne à chaque sommet-1 son identifiant de groupe, id_group = id_sommet_chef
+	nodl* liste_sommets_groupe = (nodl*)malloc(nb_sommet * sizeof(nodl)); // On donne à chaque groupe la liste des sommets qui le compose, id_group = id_sommet_chef, il y aura des cases vides
+	int* nb_sommets_groupe = (int*)malloc(nb_sommet * sizeof(int)); //Pour chaque groupe, on associe une taille, pour les sommets qu'on fusionne on pourra leur mettre 0 ou -1
+
+	int itr;
+	for(itr = 0; itr < nb_sommet; itr++) {
+		identifiant_groupe[itr] = itr + 1;
+		liste_sommets_groupe[itr].dern = NULL;
+		liste_sommets_groupe[itr].prem = NULL;
+		inserer_en_tete(itr, &liste_sommets_groupe[itr]);
+		nb_sommets_groupe[itr] = 1;
+	}
 
 ///////////////////////////////////////////////////////////
 /////////////////   COMPUTE MIN CUT   /////////////////////
@@ -149,8 +157,15 @@ int main(int argc, char **argv){
 	fflush(stderr);
 
 
+	int itr2;
+	for(itr2 = 0; itr2 < nb_sommet; itr2++) {
+		if(nb_sommets_groupe[itr2] != 0) {
+			fprintf(stderr, "Groupe %d : %d sommets\n", itr2, nb_sommets_groupe[itr2]);
+		}
+		fprintf(stderr,"pos:%d id_groupe:%d\n", itr2, identifiant_groupe[itr2]);
+	}
 
-
+	contraction_simulee(identifiant_groupe, liste_sommets_groupe, nb_sommets_groupe, 2, 4);
 
 
 ///////////////////////////////////////////////////////////

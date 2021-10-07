@@ -16,6 +16,7 @@
 
 //////////////////////////////////////////////////////
 // LA STRUCTURE STOCKANT UN GRAPHE A n SOMMETS ET m ARETES
+// links la liste des voisins
 typedef struct graph{
   int n;
   int m;
