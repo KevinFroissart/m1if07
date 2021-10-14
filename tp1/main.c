@@ -164,6 +164,18 @@ int main(int argc, char **argv){
 		}
 		fprintf(stderr,"pos:%d id_groupe:%d\n", itr2, identifiant_groupe[itr2]);
 	}
+	int un = 2;
+	int deux = 4;
+
+	int lead;
+	int fusionne;
+	if(nb_sommets_groupe[un] < nb_sommets_groupe[deux]) {
+		lead = deux;
+		fusionne = un;
+	} else {
+		lead = un;
+		fusionne = deux;
+	}
 
 	contraction_simulee(identifiant_groupe, liste_sommets_groupe, nb_sommets_groupe, 2, 4);
 
