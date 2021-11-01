@@ -74,7 +74,6 @@ void inserer_apres (int u, nodl* l, cell* p) {
 // precondition: l est non null et *l est initialise
 // postcondition: une nouvelle cellule contenant la valeur u est inseree en tete de la liste pointee par l 
 void inserer_en_tete (int u, nodl* l) {
-	fprintf(stderr,"Inserer en tete: %d.\n", u);
 	cell* q;
 	if( (q=(cell *)malloc(sizeof(cell))) == NULL )
     report_error("graph_from_file: malloc() error 1");
@@ -93,7 +92,7 @@ void inserer_en_tete (int u, nodl* l) {
 //////////////////////////////////////////////////////
 // INSERER UNE CELLULE EN QUEUE D'UNE LISTE
 // precondition: l est non null et *l est initialise
-// postcondition: une nouvelle cellule contenant la valeur u est inseree en queue de la liste pointee par l 
+// postcondition: une nouvelle cellule contenant la valeur u est inseree en queue de la liste pointee par l  
 void inserer_en_queue (int u, nodl* l) {
 	
 	if (l->dern!=NULL) inserer_apres (u, l, l->dern);

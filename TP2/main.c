@@ -18,7 +18,7 @@
 /* Default values */
 /******************/
 
-
+// ./maxstab.out -i ../tp1/graphs/graphEL_p2p-Gnutella &> sortie
 
 
 /********************/
@@ -177,18 +177,8 @@ int main(int argc, char **argv){
 /////////////////   COMPUTE MIN CUT   /////////////////////
 ///////////////////////////////////////////////////////////
 
-
-	fprintf(stderr,"Begin computation.\n");
-
 	int x = indice_degret_courant_minimun(presence, degre_courant, G->n);
-
-	for(int i = 0; i < G->n; i++) {
-        if(presence[i]) fprintf(stderr,"%d est TRUE, degré est %d.\n", i, degre_courant[i]);
-        if(!presence[i]) fprintf(stderr,"%d est FALSE, degré est %d.\n", i, degre_courant[i]);
-    }
-
 	calcul_stable_max(&presence, &degre_courant, &sommets_stable_courant, x, G, &noeuds_stables_max, &noeuds_stables_courant, &noeuds_restants); 
-	fprintf(stderr,"après fonction.\n");
 	fflush(stderr);
 
 
@@ -201,7 +191,6 @@ int main(int argc, char **argv){
 
 	fprintf(stderr,"Taille du stable maximum: %d.\n", noeuds_stables_max);
 	cell* iter = sommets_stable_courant->prem;
-	if(iter == NULL) fprintf(stderr,"iter NULL.\n");
     while(iter != NULL) {
 		fprintf(stderr,"%d\n", iter->node);
         iter = iter->suiv;
