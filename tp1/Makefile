@@ -1,13 +1,13 @@
 all: mincut.out
 
 mincut.out: main.o graph.o nodelist.o utility.o fonctions-algo.o
-	gcc -Wextra -Wall -O3 main.o graph.o nodelist.o utility.o fonctions-algo.o -o mincut.out
+	gcc -no-pie -Wextra -Wall -O3 main.o graph.o nodelist.o -fPIE utility.o fonctions-algo.o -o mincut.out
 
 main.o: main.c nodelist.h graph.h utility.h
 	gcc -Wextra -Wall -O3 -c main.c -o main.o
 
 utility.o: utility.h utility.c
-	gcc -Wextra -Wall -O3 -c utility.c -o utility.o
+	gcc -Wextra -Wall -O3 -c utility.c -fPIE -o utility.o
 
 graph.o: graph.h graph.c utility.h
 	gcc -Wextra -Wall -O3 -c graph.c -o graph.o
